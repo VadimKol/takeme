@@ -4,17 +4,142 @@ block variables
 	- var title = "TakeMe"
 
 block content
+	.page-nav
+		.wrapper.-flex
+			= '\n\t\t\t'
+			a(href="").nav-logo
+			ul.nav-list
+				each val in ['Locations','Accommodation','Travel Guides','Where To Stay','Contact Us','Log In']
+					li
+						a(href="")._item= val
 	.page-main
-		.wrapper.-lines
-			.nav
-				= '\n\t\t\t\t'
-				a(href="")._logo
-				ul.nav-list
-					each val, index in ['Home','About','Contents','Books','Education','Skills','Portfolio','Clients','Contact']
-						if index===0
+		.wrapper
+			h2.main-title.headers.headers--white Find Your Dream Vacation Location
+			p.main-text.content.content--white Search hundreds of locations from around the world and find your perfect vacation location.
+			form(action="Search" method="post").search
+				input(type="text"  placeholder="Country or ZIP code")._country
+				select(size="1").form-transport
+					option(value="0")._item Transportation
+					option(value="1")._item Airplane
+					option(value="2")._item Car
+					option(value="3")._item Ship
+					option(value="4")._item Train
+				input(type="text"  placeholder="Number of people")._peoples
+				button(type="button")._btn.btn-primary Search
+	.page-santorini
+		.wrapper.-flex
+			.santorini-text
+				h2._title.headers.headers--gray Magical Santorini Greece’s Jewel
+				p._text.content.content--gray Candy-colored houses carved into cliffs, sapphire waters, gleaming white buildings topped with half-spheres the color of a stormy sky.
+				a(href="#")._btn.btn-primary Explore More
+			.santorini-slider
+				.slider-item
+					img(src="img/santorini/img_bg1.jpg" alt="Stairway")._img
+				.slider-item
+					img(src="img/santorini/img_bg2.jpg" alt="Bells")._img
+				.slider-item
+					img(src="img/santorini/img_bg3.jpg" alt="City")._img
+				.slider-item
+					img(src="img/santorini/img_bg4.jpg" alt="Rest place")._img
+				.slider-item
+					img(src="img/santorini/img_bg5.jpg" alt="House")._img
+	.page-places
+		.wrapper.-flex
+			.places-item
+				.screen
+					img(src="img/places/paris.jpg" alt="Paris")._img
+				h3._title Magical Paris
+				p._text.content.content--gray City of light, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food and landmarks are waiting for you in Paris.
+				.box-rating
+					ul._stars
+						- for (var x = 0; x < 5; x++)
 							li
-								a(href="")._item.-active= val
-						else
+					p._rating 2436 Ratings
+			.places-item
+				.screen
+					img(src="img/places/london.jpg" alt="London")._img
+				h3._title Classic London
+				p._text.content.content--gray City of history, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food, pubs and landmarks are waiting for you in London.
+				.box-rating
+					ul._stars
+						- for (var x = 0; x < 5; x++)
 							li
-								a(href="")._item= val
-			.headerbox
+					p._rating 5438 Ratings
+			.places-item
+				.screen
+					img(src="img/places/new_york.jpg" alt="New York")._img
+				h3._title Famous New York
+				p._text.content.content--gray City of fashion and yellow cabs, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food and landmarks are waiting for you in New York.
+				.box-rating
+					ul._stars
+						- for (var x = 0; x < 5; x++)
+							li
+					p._rating 1243 Ratings
+	.page-guides
+		.guides-slider
+			each val in [{name:"Professional Guides",title:"Sea Voyages",visited:"126 Visited"},{name:"Safe Guides",title:"Mountain Climbs",visited:"241 Visited"},{name:"Expert Drivers",title:"Quad Rides",visited:"296 Visited"},{name:"Professional Guides",title:"Swimming",visited:"94 Visited"},{name:"Safe Guides",title:"Paragliding",visited:"173 Visited"},{name:"Expert Drivers",title:"Cycling",visited:"317 Visited"}]
+				._item
+					p._name= val.name
+					h3._title= val.title
+					.box-visited
+						ul._stars
+							- for (var x = 0; x < 5; x++)
+								li
+						p._visited= val.visited
+	.page-subscribe
+		.wrapper
+			.subscribe-desc
+				h2._title.headers.headers--gray Subscribe to our newsletter
+				p._text.content.content--gray And receive all the latest news, discounts and updates about the most visited locations from around the globe, daily.
+			a(href="#").subscribe-btn.btn-primary Subscribe
+	.page-form
+		form(action="Contact" method="post").contact
+			.box-name
+				label First Name
+					input(type="text" placeholder="First Name")
+				label Last Name
+					input(type="text" placeholder="Last Name")
+			.box-contact
+				label Email
+					input(type="email" placeholder="Email")
+				label Phone
+					input(type="text" placeholder="Phone")
+			label Message
+				textarea(placeholder="Your message")
+			button(type="button")._btn.btn-primary Send
+	.page-testimonials
+		.wrapper
+			.box-header
+				p.count-reviews Reviews (256)
+				select(size="1").sort
+					option(value="0")._item Sort
+					option(value="1")._item Alphabet
+					option(value="2")._item Date
+					option(value="3")._item Stars
+					option(value="4")._item Cities
+				button(type="button")._btn.btn-primary Post A Review
+			.box-reviews
+				each val,index in [
+								{name:"Anna Marksson",place:"Visited Las Vegas",title:"We had a lovely time",date:"02.17.2017",text:"&Prime;I don’t know where to start. It was simply amazing! From the time we got there to the staff at our hotel, to our Uber driver, to the meals at our restaurant, i can’t wait until we visit Las Vegas again!&Prime;"},
+								{name:"Edward Signim",place:"Visited Rome",title:"Magical Rome!",date:"02.16.2017",text:"&Prime;Everybody knows how much history this city has, but we were not prepared by just how much it is! At every single corner you can find a piece of history that is there for thousands of years. If you didn’t visit, what you are waiting for?&Prime;"},
+								{name:"Jenna Miles",place:"Visited Belgrade",title:"Where Sava meets Danube",date:"02.15.2017",text:"&Prime;This city is nothing what i expected. Such a lively place, full of color, wonderful people and fantastic food. Service is lovely and my tour guide showed me much more than it was planned, simply because he is amazing at his job! I can’t wait to go back!&Prime;"},
+								{name:"Jonathan Bright",place:"Visited Tahiti",title:"White sand, blue skies",date:"02.14.2017",text:"&Prime;When we got there it was raining, but after it stopped, it was lovely! Temperature is pleasant and i loved their free wifi zones. If you have, bring your camera because you are going to need it, a lot.&Prime;"}
+							]
+					._item
+						.person
+							._ava
+								= '\n\t\t\t\t\t'
+								img(src="img/avatars/avatar" + (index+1) + ".png" alt=val.name)._pic
+							p._name=val.name
+								|#[span._place=val.place]
+							ul._stars
+								- for (var x = 0; x < 5; x++)
+									li
+						.description
+							h3._title=val.title
+								|<time class="description__date" datetime=val.date.substring(val.date.length-5,val.date.length-1) + "-" + val.date.substring(0,1) + "-" + val.date.substring(3,4)>#{val.date}</time>
+								//-"2017-02-17"
+							p._text=val.text
+			button(type="button").reviews_btn.btn-primary Load More
+
+
