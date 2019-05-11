@@ -2,6 +2,114 @@ extends layouts/takeme
 
 block variables
 	- var title = "TakeMe"
+	-
+		var places = [
+			{
+				alt:"Paris",title:"Magical Paris",rating:"2436 Ratings",
+				text:"City of light, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food and landmarks are waiting for you in Paris."
+			},
+			{
+				alt:"London",title:"Classic London",rating:"5438 Ratings",
+				text:"City of history, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food, pubs and landmarks are waiting for you in London."
+			},
+			{
+				alt:"New York",title:"Famous New York",rating:"1243 Ratings",
+				text:"City of fashion and yellow cabs, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food and landmarks are waiting for you in New York."
+			}
+		]
+	-
+		var guides = [
+			{name:"Professional Guides",title:"Sea Voyages",visited:"126 Visited"},
+			{name:"Safe Guides",title:"Mountain Climbs",visited:"241 Visited"},
+			{name:"Expert Drivers",title:"Quad Rides",visited:"296 Visited"},
+			{name:"Professional Guides",title:"Swimming",visited:"94 Visited"},
+			{name:"Safe Guides",title:"Paragliding",visited:"173 Visited"},
+			{name:"Expert Drivers",title:"Cycling",visited:"317 Visited"}
+		]
+	-
+		var reviews = [
+			{
+				name:"Anna Marksson",place:"Visited Las Vegas",title:"We had a lovely time",date:"02.17.2017",
+				text:"\"I don’t know where to start. It was simply amazing! From the time we got there to the staff at our hotel, to our Uber driver, to the meals at our restaurant, i can’t wait until we visit Las Vegas again!\""
+			},
+			{
+				name:"Edward Signim",place:"Visited Rome",title:"Magical Rome!",date:"02.16.2017",
+				text:"\"Everybody knows how much history this city has, but we were not prepared by just how much it is! At every single corner you can find a piece of history that is there for thousands of years. If you didn’t visit, what you are waiting for?\""
+			},
+			{
+				name:"Jenna Miles",place:"Visited Belgrade",title:"Where Sava meets Danube",date:"02.15.2017",
+				text:"\"This city is nothing what i expected. Such a lively place, full of color, wonderful people and fantastic food. Service is lovely and my tour guide showed me much more than it was planned, simply because he is amazing at his job! I can’t wait to go back!\""
+			},
+			{
+				name:"Jonathan Bright",place:"Visited Tahiti",title:"White sand, blue skies",date:"02.14.2017",
+				text:"\"When we got there it was raining, but after it stopped, it was lovely! Temperature is pleasant and i loved their free wifi zones. If you have, bring your camera because you are going to need it, a lot.\""
+			}
+		]
+	-
+		var cards = [
+			{
+				title:"New York Skyline Tour",subtitle:"The best of New York",reviews:"146 Reviews",price:"$15",spaces:"126 spaces left",
+				text:"Take a look at New York from above, the best way to see this city. You will find all the classic buildings, sights and more plus there is a lunch after the tour."
+			},
+			{
+				title:"New York City",subtitle:"Walking tour",reviews:"292 Reviews",price:"$19",spaces:"243 spaces left",
+				text:"Take a look at New York from the street level, walk like a New Yorker. You will see all the classic things, sights and more plus there is a lunch after the tour."
+			},
+			{
+				title:"New York City",subtitle:"The Food Tour",reviews:"381 Reviews",price:"$25",spaces:"110 spaces left",
+				text:"Learn where are all the best places to eat in this city, how to find your way around thousands of great and tasty restaurants and lear New York trough it’s food."
+			}			
+		]
+	-
+		var kit_list = [
+			{
+				list_name:"lang",
+				arr:['Language Spoken','English','Spanish','German','French','Italian','Russian','Chinese']
+			},
+			{
+				list_name:"meal",
+				arr:['Meal Type','Meat','Fish','Vegetables','Fruits','Eggs','Dishes','Other food']
+			},
+			{
+				list_name:"excursion",
+				arr:['Excursions','Local history','Archaeological','Ethnographic','Military history','Literary','Architectural']
+			},
+			{
+				list_name:"hotel",
+				arr:['Hotel Type','Luxury','First Class','Comfort','Standard','Tourist']
+			},
+			{
+				list_name:"room",
+				arr:['Room Type','Single','Double','Studio','Suite','Apartments','Cabana','Villa']
+			},
+			{
+				list_name:"car",
+				arr:['Rent A Car','Family','Green','Fun','Prestige','Advance','Minibus']
+			},
+			{
+				list_name:"shuttle",
+				arr:['Shuttle Transport','Airliner','Luxury','Taxi','Car Service','Bus']
+			},
+			{
+				list_name:"parking",
+				arr:['Parking','Short','Long','Business','Valet','Motorcycle']
+			}
+		]
+	-
+		var links = [
+			{
+				title:"Company",
+				list:['About Us','Careers','Contact Us','Affiliates','News','Our App','Site Map']
+			},
+			{
+				title:"Useful Links",
+				list:['Travel Safe','Stay Healthy','Flight Monitor','Booking List','Lost Lugage','World Clock']
+			},
+			{
+				title:"For Companies",
+				list:['Advertise With Us','How It Works','Pricing Models','VAT Numbers']
+			}
+		]
 
 block content
 	.page-nav
@@ -17,129 +125,216 @@ block content
 			h2.main-title.headers.headers--white Find Your Dream Vacation Location
 			p.main-text.content.content--white Search hundreds of locations from around the world and find your perfect vacation location.
 			form(action="Search" method="post").search
-				input(type="text"  placeholder="Country or ZIP code")._country
-				select(size="1").form-transport
-					option(value="0")._item Transportation
-					option(value="1")._item Airplane
-					option(value="2")._item Car
-					option(value="3")._item Ship
-					option(value="4")._item Train
-				input(type="text"  placeholder="Number of people")._peoples
+				input(type="text" placeholder="Country or ZIP code")._country
+				select(size="1").search-transport
+					each val, index in ['Transportation','Airplane','Car','Ship','Train']
+						option(value=index)._item=val
+				input(type="number" placeholder="Number of people" min="1" max="10000")._peoples
 				button(type="button")._btn.btn-primary Search
 	.page-santorini
 		.wrapper.-flex
 			.santorini-text
 				h2._title.headers.headers--gray Magical Santorini Greece’s Jewel
 				p._text.content.content--gray Candy-colored houses carved into cliffs, sapphire waters, gleaming white buildings topped with half-spheres the color of a stormy sky.
+				= '\n\t\t\t\t'
 				a(href="#")._btn.btn-primary Explore More
 			.santorini-slider
-				.slider-item
-					img(src="img/santorini/img_bg1.jpg" alt="Stairway")._img
-				.slider-item
-					img(src="img/santorini/img_bg2.jpg" alt="Bells")._img
-				.slider-item
-					img(src="img/santorini/img_bg3.jpg" alt="City")._img
-				.slider-item
-					img(src="img/santorini/img_bg4.jpg" alt="Rest place")._img
-				.slider-item
-					img(src="img/santorini/img_bg5.jpg" alt="House")._img
+				each val, index in ['Stairway','Bells','City','Rest place','House']
+					.slider-item
+						= '\n\t\t\t\t\t'
+						img(src="img/santorini/img_bg"+index+".jpg" alt=val)._img
 	.page-places
 		.wrapper.-flex
-			.places-item
-				.screen
-					img(src="img/places/paris.jpg" alt="Paris")._img
-				h3._title Magical Paris
-				p._text.content.content--gray City of light, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food and landmarks are waiting for you in Paris.
-				.box-rating
-					ul._stars
-						- for (var x = 0; x < 5; x++)
-							li
-					p._rating 2436 Ratings
-			.places-item
-				.screen
-					img(src="img/places/london.jpg" alt="London")._img
-				h3._title Classic London
-				p._text.content.content--gray City of history, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food, pubs and landmarks are waiting for you in London.
-				.box-rating
-					ul._stars
-						- for (var x = 0; x < 5; x++)
-							li
-					p._rating 5438 Ratings
-			.places-item
-				.screen
-					img(src="img/places/new_york.jpg" alt="New York")._img
-				h3._title Famous New York
-				p._text.content.content--gray City of fashion and yellow cabs, one of the most famous cities in the world is waiting to be explored. Some of the most famous museums, food and landmarks are waiting for you in New York.
-				.box-rating
-					ul._stars
-						- for (var x = 0; x < 5; x++)
-							li
-					p._rating 1243 Ratings
+			each val in places
+				.places-item
+					.screen
+						= '\n\t\t\t\t\t'
+						img(src="img/places/"+val.alt.toLowerCase().replace(' ','_')+".jpg" alt=val.alt)._img
+					h3._title=val.title
+					p._text.content.content--gray=val.text
+					.places-rating
+						ul._stars
+							- for (var x = 0; x < 5; x++)
+								li
+						p._rating=val.rating
 	.page-guides
 		.guides-slider
-			each val in [{name:"Professional Guides",title:"Sea Voyages",visited:"126 Visited"},{name:"Safe Guides",title:"Mountain Climbs",visited:"241 Visited"},{name:"Expert Drivers",title:"Quad Rides",visited:"296 Visited"},{name:"Professional Guides",title:"Swimming",visited:"94 Visited"},{name:"Safe Guides",title:"Paragliding",visited:"173 Visited"},{name:"Expert Drivers",title:"Cycling",visited:"317 Visited"}]
-				._item
+			each val in guides
+				.guides-slider-item
 					p._name= val.name
 					h3._title= val.title
-					.box-visited
+					.guides-visited
 						ul._stars
 							- for (var x = 0; x < 5; x++)
 								li
 						p._visited= val.visited
 	.page-subscribe
-		.wrapper
+		.wrapper.-flex
 			.subscribe-desc
 				h2._title.headers.headers--gray Subscribe to our newsletter
 				p._text.content.content--gray And receive all the latest news, discounts and updates about the most visited locations from around the globe, daily.
+			= '\n\t\t\t'
 			a(href="#").subscribe-btn.btn-primary Subscribe
 	.page-form
 		form(action="Contact" method="post").contact
 			.box-name
-				label First Name
-					input(type="text" placeholder="First Name")
-				label Last Name
-					input(type="text" placeholder="Last Name")
+				._item
+					label(for="first-name") First Name
+					input(type="text" placeholder="First Name")#first-name
+				._item
+					label(for="last-name") Last Name
+					input(type="text" placeholder="Last Name")#last-name
 			.box-contact
-				label Email
-					input(type="email" placeholder="Email")
-				label Phone
-					input(type="text" placeholder="Phone")
-			label Message
-				textarea(placeholder="Your message")
+				._item
+					label(for="contact-email") Email
+					input(type="email" placeholder="Email")#contact-email
+				._item
+					label(for="contact-phone") Phone
+					input(type="tel" placeholder="Phone" pattern="+[0-9]{,3}[0-9]{3}[0-9]{3}[0-9]{4}" title="+01234567890")#contact-phone
+			label(for="contact-msg") Message
+			textarea(placeholder="Your message")#contact-msg
 			button(type="button")._btn.btn-primary Send
 	.page-testimonials
 		.wrapper
 			.box-header
 				p.count-reviews Reviews (256)
-				select(size="1").sort
-					option(value="0")._item Sort
-					option(value="1")._item Alphabet
-					option(value="2")._item Date
-					option(value="3")._item Stars
-					option(value="4")._item Cities
+				select(size="1").sort-reviews
+					each val, index in ['Sort','Alphabet','Date','Stars','Cities']
+						option(value=index)._item=val
 				button(type="button")._btn.btn-primary Post A Review
 			.box-reviews
-				each val,index in [
-								{name:"Anna Marksson",place:"Visited Las Vegas",title:"We had a lovely time",date:"02.17.2017",text:"&Prime;I don’t know where to start. It was simply amazing! From the time we got there to the staff at our hotel, to our Uber driver, to the meals at our restaurant, i can’t wait until we visit Las Vegas again!&Prime;"},
-								{name:"Edward Signim",place:"Visited Rome",title:"Magical Rome!",date:"02.16.2017",text:"&Prime;Everybody knows how much history this city has, but we were not prepared by just how much it is! At every single corner you can find a piece of history that is there for thousands of years. If you didn’t visit, what you are waiting for?&Prime;"},
-								{name:"Jenna Miles",place:"Visited Belgrade",title:"Where Sava meets Danube",date:"02.15.2017",text:"&Prime;This city is nothing what i expected. Such a lively place, full of color, wonderful people and fantastic food. Service is lovely and my tour guide showed me much more than it was planned, simply because he is amazing at his job! I can’t wait to go back!&Prime;"},
-								{name:"Jonathan Bright",place:"Visited Tahiti",title:"White sand, blue skies",date:"02.14.2017",text:"&Prime;When we got there it was raining, but after it stopped, it was lovely! Temperature is pleasant and i loved their free wifi zones. If you have, bring your camera because you are going to need it, a lot.&Prime;"}
-							]
+				each val, index in reviews
 					._item
 						.person
 							._ava
-								= '\n\t\t\t\t\t'
-								img(src="img/avatars/avatar" + (index+1) + ".png" alt=val.name)._pic
-							p._name=val.name
-								|#[span._place=val.place]
+								= '\n\t\t\t\t\t\t\t'
+								img(src="img/avatars/avatar"+index+".png" alt=val.name)._pic
+							p._name=val.name 
+								span._place=val.place
 							ul._stars
 								- for (var x = 0; x < 5; x++)
 									li
 						.description
 							h3._title=val.title
-								|<time class="description__date" datetime=val.date.substring(val.date.length-5,val.date.length-1) + "-" + val.date.substring(0,1) + "-" + val.date.substring(3,4)>#{val.date}</time>
-								//-"2017-02-17"
+								|<time class="description__date" datetime="#{val.date.substring(val.date.length-4,val.date.length)}-#{val.date.substring(0,2)}-#{val.date.substring(3,5)}">#{val.date}</time>
+								//-"MM.DD.YYYY"->"YYYY-MM-DD"
 							p._text=val.text
 			button(type="button").reviews_btn.btn-primary Load More
-
-
+	.page-kit
+		.wrapper
+			.top-bar
+				p._text.content.content--gray.content--size_b Where do you want to travel today?
+				ul.tags
+					each val in ["USA","New York","City Life","Cheap"]
+						li.tags-item=val
+							|<button type="button" class="tags-item__btn">
+				.kit-nav
+					button(type="button")._btn List View
+					button(type="button")._btn Map View
+					select(size="1").sort-places
+						each val, index in ['Sort By','Alphabet','Reviews','Prices','Spaces']
+							option(value=index)._item=val
+			.main-kit
+				each val in cards
+					.cards-item
+						.cards-item-header
+							h3._title=val.title
+								span._subtitle=val.subtitle
+							.cards-item-reviews
+								ul._stars
+									- for (var x = 0; x < 5; x++)
+										li
+								p._reviews=val.reviews
+						.cards-item-img
+							p._price=val.price
+						p._text.content.content--gray.content--size_m=val.text
+						.cards-item-footer
+							._spaces
+								= '\n\t\t\t\t\t\t\t'
+								i._ico
+								p.spaces-left.content.content--gray.content--size_m=cards.spaces
+							button(type="button").book_btn.btn-primary Book Now
+				ul.kit-lists
+					each val in kit_list
+						li.kit-lists-element
+							select(size="1" class="kit-lists-element"+"__"+val.list_name)
+								each item, index in val.arr
+									option(value=index)=item
+				.dest
+					h3._title Destinations
+					ul.continents
+						each val in ['Europe','Asia','Africa','North America','South America']
+							li._item=val
+				.trip
+					h3._title Trip Type
+					ul.trip-list
+						li._item
+							input(type="checkbox" checked)#round-trip
+							label(for="round-trip") Round Trip
+						li._item
+							input(type="checkbox")#one-way
+							label(for="one-way") One Way
+				ul.kit-type
+					li._item
+						input(type="checkbox")#first-class
+						label(for="first-class") First Class
+					li._item
+						input(type="checkbox")#business
+						label(for="business") Business
+					li._item
+						input(type="checkbox" checked)#coach
+						label(for="coach") Coach
+				.country-city
+					input(type="text" placeholder="Where country you want to go?")._country
+					input(type="text" placeholder="Where city you want to go?")._city
+				.price-range
+					h3._title Price Range
+					.price-range-slider
+						._handle
+				ul.carry-on
+					li._item
+						input(type="checkbox")#without-carry
+						label(for="without-carry") Without Carry On
+					li._item
+						input(type="checkbox" checked)#with-carry
+						label(for="with-carry") With Carry On
+				.kit-slider
+	.page-map
+	.page-video
+		h2.video-title.headers.headers--white See Dubai from the sky
+		= '\n\t\t'
+		a(href="")._video
+	.page-app
+		.wrapper.-flex
+			.iphone
+			.app-text
+				h2._title.headers.headers--gray Download Our Free App!
+				p._text.content.content--gray Download our free app and stay up to date with all our latest discounts, articles and reviews. Take a look at all the world’s top destinations and decide where to spend your perfect vacation.
+				= '\n\t\t\t\t'
+				a(href="#")._btn.btn-primary Download Now
+	.page-links
+		.wrapper.-flex
+			.links
+				each val in links
+					.links-item
+						h3._title=val.title
+						ul._list
+							each link in val.list
+								li
+									a(href="")=link
+			.social
+				h3._title Stay in Touch
+				form(action="Subscribe" method="post").social-sub
+					input(type="email" placeholder="Your Email")._email
+					button(type="submit")._btn.btn-primary Subscribe
+				ul.social-links
+					each val in ['twitter','instagram','facebook-f','google-plus-g']
+						li
+							a.fab(href="" target="_blank" class='fa-'+val)
+	.page-footer
+		.wrapper.-flex
+			p.copyright.content.content--gray.content--size_m &copy; 2017 TakeMe Free UI Kit
+			ul.law
+				each val in ['Privacy Policy','Terms of Use','Cookies Policy']
+					li
+						a(href="#")._item=val
