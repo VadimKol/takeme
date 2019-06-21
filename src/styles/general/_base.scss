@@ -1,7 +1,6 @@
 /*Tags*/
 body {
 	font-family: 'Roboto', sans-serif;
-	letter-spacing: 0;
 	color: $typography;
 }
 h1, h2, h3, h4, h5, h6, ul, p {
@@ -33,71 +32,48 @@ img {
 		justify-content: space-between;
 	}
 }
-.content {
-	margin-bottom: 24px;
-	&--white {
-		color: $whitecolor;
-	}
-}
 .btn-primary {
 	display: inline-block;
-	font-size: 18px;
-	letter-spacing: $secondraytracking;
-	line-height: normal;
 	color: $whitecolor;
-	padding: 12px 25px 12px 26px;
-	border-radius: 3px;
-	background-color: #65e4a1;
-	background-image: linear-gradient(-90deg, #65e4ce 0%, #65e4a1 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#65e4ce', endColorstr='#65e4a1', GradientType=1);
-	box-shadow: 0px 2px rgba(101, 228, 125, 0.5),inset 0 48px rgba(255,255,255,0);
-	transition: box-shadow 0.2s;
-	&:hover {
-		box-shadow: 0px 2px rgba(101, 228, 125, 0.5),inset 0 48px rgba(255,255,255,0.2);
+	line-height: 1;
+	border-radius: 6px;
+	border: 1px solid $accentcolor;
+	background-color: transparent;
+	transition: color 0.3s 0.1s ease-out;
+	position: relative;
+	overflow: hidden;
+	z-index: 0;
+	&::before {
+		position: absolute;
+		top: 0;
+		left: -50%;
+		bottom: 0;
+		margin: auto;
+		content:'';
+		border-radius: 50%;
+		width: calc(200% + 4px);
+		transition: box-shadow 0.5s ease-out;
+		z-index: -1;
 	}
-	&:active {
-		box-shadow: inset 0 48px rgba(255,255,255,0.2);
-		transform: translateY(2px);
+	&:hover {
+		color: $accentcolor;
+		&::before {
+			box-shadow: inset 0 0 $accentcolor;
+		}
 	}
 }
-
 /*headers*/
 .headers {
 	font-weight: bold;
 	font-size: 48px;
-	line-height: normal;
-	letter-spacing: $secondraytracking;
-	color: $headerscolor;
 	&--white {
 		color: $whitecolor;
 	}
 	&--center {
 		text-align: center;
 	}
-	margin: 0 0 38px;
 }
-.subheaders {
-	display: block;
-	font-weight: normal;
-	font-size: 18px;
-	letter-spacing: $primarytracking;
-	color: $subheaderscolor;
-	text-transform: none;
-	margin: 5px 0 0;
-}
-.supertitle {
-	font-size: 18px;
-	letter-spacing: $primarytracking;
-	line-height: normal;
-	&--white {
-		color: $whitecolor;
-	}
-	&--green {
-		color: $subheaderscolor;
-	}
-}
-
-/*page-main*/
+/*page-nav*/
 .nav {
 	display: flex;
 	justify-content: space-between;
@@ -119,7 +95,6 @@ img {
 		&__item {
 			display: inline-block;
 			font-size: 16px;
-			letter-spacing: $primarytracking;
 			line-height: 1.75;
 			color: $whitecolor;
 			transition: box-shadow 0.2s;
@@ -165,10 +140,96 @@ img {
 		}
 	}
 }
+/*page-main*/
+.search {
+	&__btn {
+		padding: 16px 60px 16px 61px;
+		&::before {
+			height: 344.25px;
+			box-shadow: inset 0 0 0 172.125px $accentcolor;
+		}
+	}
+}
+/*page-santorini*/
+.santorini-desc {
+	flex-basis: 600px;
+	&__btn {
+		padding: 16px 109px;
+		&::before {
+			height: 545.5px;
+			box-shadow: inset 0 0 0 272.75px $accentcolor;
+		}
+	}
+}
+.santorini-slider {
+	flex-basis: calc(100% - 600px);
+}
+/*page-sub*/
+.sub-btn {
+	padding: 16px 100px;
+	&::before {
+		height: 545.344px;
+		box-shadow: inset 0 0 0 272.672px $accentcolor;
+	}
+}
+/*page-form*/
+.contact {
+	&__btn {
+		padding: 16px 117px 16px 118px;
+		&::before {
+			height: 545.66px;
+			box-shadow: inset 0 0 0 272.828px $accentcolor;
+		}
+	}
+}
+/*page-testimonials*/
+.reviews_btn {
+	padding: 13px 47px 14px 47px;
+	&::before {
+		height: 344.532px;
+		box-shadow: inset 0 0 0 172.266px $accentcolor;
+	}
+}
+/*page-kit*/
+.card {
+	&-footer {
+		&__btn {
+			padding: 13px 49px 14px 49px;
+			&::before{
+				height: 345.688px;
+				box-shadow: inset 0 0 0 172.844px $accentcolor;
+			}
+		}
+	}
+}
+/*page-app*/
+.app-load {
+	&__btn {
+		padding: 16px 81px 16px 82px;
+		&::before {
+			height: 545.438px;
+			box-shadow: inset 0 0 0 272.719px $accentcolor;
+		}
+	}
+}
+/*page-links*/
+.social {
+	&-sub {
+		&__btn {
+			padding: 13px 50px 14px 50px;
+			&::before{
+				height: 345.344px;
+				box-shadow: inset 0 0 0 172.672px $accentcolor;
+			}
+		}
+	}
+}
 /*pages*/
 .page-main {
 	background-image: url(../img/header/h_bg1.jpg);
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
+	@extend %for-backgrounds;
+}
+.page-video {
+	background-image: url(../img/dubai_bg.jpg);
+	@extend %for-backgrounds;
 }

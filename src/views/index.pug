@@ -115,27 +115,30 @@ block content
 	.page-nav
 		.wrapper.-flex
 			= '\n\t\t\t'
-			a(href="").nav-logo
-			ul.nav-list
+			a(href="").logo
+			ul.nav
 				each val in ['Locations','Accommodation','Travel Guides','Where To Stay','Contact Us','Log In']
 					li
 						a(href="")._item= val
 	.page-main
 		.wrapper
-			h2.main-title.headers.headers--white Find Your Dream Vacation Location
-			p.main-text.content.content--white Search hundreds of locations from around the world and find your perfect vacation location.
+			h2.main-title.headers.headers--white.headers--center Find Your Dream Vacation Location
+			p.main-text Search hundreds of locations from around the world and find your perfect vacation location.
 			form(action="Search" method="post").search
 				input(type="text" placeholder="Country or ZIP code")._country
 				select(size="1").search-transport
 					each val, index in ['Transportation','Airplane','Car','Ship','Train']
-						option(value=index)._item=val
+						if index === 0
+							option(value=index disabled selected hidden)._item=val
+						else
+							option(value=index)._item=val
 				input(type="number" placeholder="Number of people" min="1" max="10000")._peoples
 				button(type="button")._btn.btn-primary Search
 	.page-santorini
 		.wrapper.-flex
-			.santorini-text
-				h2._title.headers.headers--gray Magical Santorini Greece’s Jewel
-				p._text.content.content--gray Candy-colored houses carved into cliffs, sapphire waters, gleaming white buildings topped with half-spheres the color of a stormy sky.
+			.santorini-desc
+				h2._title.headers Magical Santorini Greece’s Jewel
+				p._text Candy-colored houses carved into cliffs, sapphire waters, gleaming white buildings topped with half-spheres the color of a stormy sky.
 				= '\n\t\t\t\t'
 				a(href="#")._btn.btn-primary Explore More
 			.santorini-slider
@@ -146,35 +149,35 @@ block content
 	.page-places
 		.wrapper.-flex
 			each val in places
-				.places-item
+				.place
 					.screen
 						= '\n\t\t\t\t\t'
 						img(src="img/places/"+val.alt.toLowerCase().replace(' ','_')+".jpg" alt=val.alt)._img
 					h3._title=val.title
-					p._text.content.content--gray=val.text
-					.places-rating
+					p._text=val.text
+					.place-rating
 						ul._stars
 							- for (var x = 0; x < 5; x++)
 								li
-						p._rating=val.rating
+						p._number=val.rating
 	.page-guides
 		.guides-slider
 			each val in guides
-				.guides-slider-item
+				.guide
 					p._name= val.name
 					h3._title= val.title
-					.guides-visited
+					.guide-visited
 						ul._stars
 							- for (var x = 0; x < 5; x++)
 								li
-						p._visited= val.visited
-	.page-subscribe
+						p._number= val.visited
+	.page-sub
 		.wrapper.-flex
-			.subscribe-desc
-				h2._title.headers.headers--gray Subscribe to our newsletter
-				p._text.content.content--gray And receive all the latest news, discounts and updates about the most visited locations from around the globe, daily.
+			.sub
+				h2._title.headers Subscribe to our newsletter
+				p._text And receive all the latest news, discounts and updates about the most visited locations from around the globe, daily.
 			= '\n\t\t\t'
-			a(href="#").subscribe-btn.btn-primary Subscribe
+			a(href="#").sub-btn.btn-primary Subscribe
 	.page-form
 		form(action="Contact" method="post").contact
 			.box-name
@@ -200,8 +203,11 @@ block content
 				p.count-reviews Reviews (256)
 				select(size="1").sort-reviews
 					each val, index in ['Sort','Alphabet','Date','Stars','Cities']
-						option(value=index)._item=val
-				button(type="button")._btn.btn-primary Post A Review
+						if index === 0
+							option(value=index disabled selected hidden)._item=val
+						else
+							option(value=index)._item=val
+				button(type="button")._btn Post A Review
 			.box-reviews
 				each val, index in reviews
 					._item
@@ -223,7 +229,7 @@ block content
 	.page-kit
 		.wrapper
 			.top-bar
-				p._text.content.content--gray.content--size_b Where do you want to travel today?
+				p._text Where do you want to travel today?
 				ul.tags
 					each val in ["USA","New York","City Life","Cheap"]
 						li.tags-item=val
@@ -231,35 +237,41 @@ block content
 				.kit-nav
 					button(type="button")._btn List View
 					button(type="button")._btn Map View
-					select(size="1").sort-places
+					select(size="1").sort-cards
 						each val, index in ['Sort By','Alphabet','Reviews','Prices','Spaces']
-							option(value=index)._item=val
-			.main-kit
+							if index === 0
+								option(value=index disabled selected hidden)._item=val
+							else
+								option(value=index)._item=val
+			.kit
 				each val in cards
-					.cards-item
-						.cards-item-header
+					.card
+						.card-header
 							h3._title=val.title
 								span._subtitle=val.subtitle
-							.cards-item-reviews
+							.card-reviews
 								ul._stars
 									- for (var x = 0; x < 5; x++)
 										li
-								p._reviews=val.reviews
-						.cards-item-img
+								p._quantity=val.reviews
+						.card-img
 							p._price=val.price
-						p._text.content.content--gray.content--size_m=val.text
-						.cards-item-footer
-							._spaces
+						p._text=val.text
+						.card-footer
+							.card-footer-spaces
 								= '\n\t\t\t\t\t\t\t'
 								i._ico
-								p.spaces-left.content.content--gray.content--size_m=cards.spaces
-							button(type="button").book_btn.btn-primary Book Now
+								p._left=cards.spaces
+							button(type="button")._btn.btn-primary Book Now
 				ul.kit-lists
 					each val in kit_list
 						li.kit-lists-element
 							select(size="1" class="kit-lists-element"+"__"+val.list_name)
 								each item, index in val.arr
-									option(value=index)=item
+									if index === 0
+										option(value=index disabled selected hidden)=item
+									else
+										option(value=index)=item
 				.dest
 					h3._title Destinations
 					ul.continents
@@ -301,15 +313,15 @@ block content
 				.kit-slider
 	.page-map
 	.page-video
-		h2.video-title.headers.headers--white See Dubai from the sky
+		h2.video-title.headers.headers--white.headers--center See Dubai from the sky
 		= '\n\t\t'
-		a(href="")._video
+		a(href="").video
 	.page-app
 		.wrapper.-flex
 			.iphone
-			.app-text
-				h2._title.headers.headers--gray Download Our Free App!
-				p._text.content.content--gray Download our free app and stay up to date with all our latest discounts, articles and reviews. Take a look at all the world’s top destinations and decide where to spend your perfect vacation.
+			.app-load
+				h2._title.headers Download Our Free App!
+				p._text Download our free app and stay up to date with all our latest discounts, articles and reviews. Take a look at all the world’s top destinations and decide where to spend your perfect vacation.
 				= '\n\t\t\t\t'
 				a(href="#")._btn.btn-primary Download Now
 	.page-links
@@ -333,8 +345,8 @@ block content
 							a.fab(href="" target="_blank" class='fa-'+val)
 	.page-footer
 		.wrapper.-flex
-			p.copyright.content.content--gray.content--size_m &copy; 2017 TakeMe Free UI Kit
+			p.copyright &copy; 2017 TakeMe Free UI Kit
 			ul.law
 				each val in ['Privacy Policy','Terms of Use','Cookies Policy']
 					li
-						a(href="#")._item=val
+						a(href="")._item=val
